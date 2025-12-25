@@ -1,7 +1,13 @@
 FROM node:20
-WORKDIR /app
-COPY api api
-RUN cd api \
-  && npm install \
-  && npx prisma@5.8.0 generate --schema=prisma/schema.prisma
-CMD ["node","api/server.js"]
+
+WORKDIR /app/api
+
+COPY api/package*.json ./
+
+RUN npm install
+
+COPY api .
+
+RUN npx prisma generate
+
+CMD ["npm", "start"]

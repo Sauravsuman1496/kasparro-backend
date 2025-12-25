@@ -23,3 +23,10 @@ model Coin {
   price     Float
   updatedAt DateTime
 }
+
+model EtlRun {
+  id        Int      @id @default(autoincrement())
+  status    String
+  rowsAdded Int
+  runAt     DateTime @default(now())
+}
