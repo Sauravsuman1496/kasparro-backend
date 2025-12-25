@@ -1,0 +1,25 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+
+model RawCoin {
+  id        Int      @id @default(autoincrement())
+  source    String
+  symbol    String
+  price     Float
+  fetchedAt DateTime @default(now())
+}
+
+model Coin {
+  id        Int      @id @default(autoincrement())
+  symbol    String   @unique
+  price     Float
+  updatedAt DateTime
+}
